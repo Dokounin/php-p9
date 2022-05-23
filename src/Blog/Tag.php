@@ -18,10 +18,9 @@ namespace App\Blog;
 use App\Blog\ANameObject;
 use App\Blog\Traits\Articlable;
 
-class Category extends ANameObject
+class Tag extends ANameObject
 {
     use Articlable;
-
 
     public function __construct(int $id, string $name, ?string $description, array $articles = [])
     {

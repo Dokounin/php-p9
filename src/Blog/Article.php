@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 // Article
 // - id
 // - title
@@ -19,25 +21,32 @@
 
 namespace App\Blog;
 
+use App\Blog\Category;
+use App\Blog\Traits\Categorizable;
+use App\Blog\Traits\Taggable;
+
 class Article
 {
+    use Categorizable;
+    use Taggable;
+
     private $id;
     private $title;
     private $body;
-    private $category;
 
-    public function __construct($id, $title, $body, $category)
+    public function __construct(int $id, string $title, string $body, Category $category, array $tags = [])
     {
         $this->id = $id;
         $this->title = $title;
         $this->body = $body;
         $this->setCategory($category);
+        $this->setTags($tags);
     }
 
     /**
      * Get the value of id
      */
-    public function getId() : int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -55,7 +64,7 @@ class Article
      *
      * @return  self
      */
-    public function setTitle(string $title): Article
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
@@ -65,7 +74,7 @@ class Article
     /**
      * Get the value of body
      */
-    public function getBody()
+    public function getBody(): string
     {
         return $this->body;
     }
@@ -75,7 +84,7 @@ class Article
      *
      * @return  self
      */
-    public function setBody($body)
+    public function setBody(string $body): self
     {
         $this->body = $body;
 
@@ -85,7 +94,7 @@ class Article
     /**
      * Get the value of category
      */
-    public function getCategory()
+    public function getCategory(): Category
     {
         return $this->category;
     }
@@ -95,7 +104,7 @@ class Article
      *
      * @return  self
      */
-    public function setCategory($category)
+    public function setCategory(Category $category): self
     {
         $this->category = $category;
 
